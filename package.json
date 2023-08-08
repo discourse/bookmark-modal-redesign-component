@@ -1,0 +1,7 @@
+{
+  "author": "Martin Brennan",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-discourse": "latest"
+  }
+}

@@ -1,0 +1,7 @@
+en:
+  theme_metadata:
+    description: "An experimental theme component to test bookmark modal redesign ideas"
+  bookmarks:
+    save_bookmark: "Bookmark"
+    after_reminder_label: "After reminding you we should..."
+    after_reminder_checkbox: "Set this as default for all future bookmark reminders"
