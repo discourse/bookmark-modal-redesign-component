@@ -4,11 +4,29 @@
   @flash={{this.flash}}
   @flashType="error"
   id="bookmark-reminder-modal"
-  class="bookmark-reminder-modal bookmark-with-reminder"
+  class="bookmark-reminder-modal bookmark-with-reminder bookmark-redesigned-modal"
   data-bookmark-id={{this.bookmark.id}}
   {{did-insert this.didInsert}}
 >
   <:body>
+    <div class="bookmark-context">
+      <div class="bookmark-context-user-avatar">
+        <div
+          role="button"
+          class="clickable"
+          data-user-card={{@model.context.user.username}}
+        >
+          {{avatar @model.context imageSize="small"}}
+        </div>
+
+        <span>{{@model.context.user.username}}</span>
+      </div>
+
+      <div class="bookmark-context-excerpt">{{html-safe
+          @model.context.cooked
+        }}</div>
+    </div>
+
     <div class="control-group bookmark-name-wrap">
       <Input
         id="bookmark-name"
@@ -21,7 +39,16 @@
       />
     </div>
 
-    <p><strong>Calendar</strong></p>
+    {{!--
+    <CalendarDateTimeInput
+      @datePickerId="bookmark"
+      @date={{this.reminderDate}}
+      @time={{this.reminderTime}}
+      @minDate={{this.minDate}}
+      @onChangeDate={{action this.changeSelectedDate}}
+      @onChangeTime={{action this.changeSelectedTime}}
+    />
+		--}}
 
     <div class="control-group bookmark-auto-delete-wrap">
       <label class="control-label" for="bookmark_auto_delete_preference">{{i18n

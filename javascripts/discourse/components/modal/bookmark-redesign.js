@@ -11,6 +11,7 @@ import I18n from "I18n";
 import { and, notEmpty } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
+import { now } from "discourse/lib/time-utils";
 
 export default class BookmarkRedesignModal extends Component {
   @service dialog;
@@ -24,6 +25,8 @@ export default class BookmarkRedesignModal extends Component {
   @tracked flash = null;
   @tracked userTimezone = this.currentUser.user_option.timezone;
   @tracked showOptions = this.args.model.bookmark.id ? true : false;
+  @tracked reminderDate = null;
+  @tracked reminderTime = null;
 
   @notEmpty("userTimezone") userHasTimezoneSet;
 
@@ -35,6 +38,10 @@ export default class BookmarkRedesignModal extends Component {
   @tracked _savingBookmarkManually = false;
   @tracked _saving = false;
   @tracked _deleting = false;
+
+  get minDate() {
+    return now(this.currentUser.user_option.timezone).toDate();
+  }
 
   get bookmark() {
     return this.args.model.bookmark;
@@ -60,10 +67,6 @@ export default class BookmarkRedesignModal extends Component {
         document.getElementById("bookmark-name").blur();
       }
     });
-
-    if (!this.args.model.bookmark.id) {
-      document.getElementById("tap_tile_none").classList.add("active");
-    }
 
     this.#initializeExistingBookmarkData();
   }
@@ -108,6 +111,16 @@ export default class BookmarkRedesignModal extends Component {
       .finally(() => {
         this._saving = false;
       });
+  }
+
+  @action
+  changeSelectedDate(date) {
+    this.reminderDate = date;
+  }
+
+  @action
+  changeSelectedTime(time) {
+    this.reminderTime = time;
   }
 
   #saveBookmark() {
