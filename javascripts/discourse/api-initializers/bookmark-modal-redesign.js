@@ -1,10 +1,10 @@
-import { apiInitializer } from "discourse/lib/api";
 import {
   CLOSE_INITIATED_BY_BUTTON,
   CLOSE_INITIATED_BY_ESC,
 } from "discourse/components/d-modal";
-import Bookmark from "discourse/models/bookmark";
+import { apiInitializer } from "discourse/lib/api";
 import { BookmarkFormData } from "discourse/lib/bookmark";
+import Bookmark from "discourse/models/bookmark";
 import BookmarkRedesignModal from "../components/modal/bookmark-redesign";
 
 export default apiInitializer("0.11.1", (api) => {
